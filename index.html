@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Iqbal Nazulis - Backend Engineer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Universe Background -->
+    <canvas id="universe"></canvas>
+    <div class="cursor-glow"></div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Iqbal Nazulis</div>
+            <ul class="nav-menu">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Hi, I'm <span class="highlight">Muhammad Iqbal Nazulis</span></h1>
+                    <h2>Software Engineer</h2>
+                    <p>Building scalable systems with Go, Java, and distributed technologies | 5+ years of experience</p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">View My Work</a>
+                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                        <a href="Muhammad Iqbal Nazulis.pdf" target="_blank" class="btn btn-cv">Get My Resume</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="images/profile.JPEG" alt="Muhammad Iqbal Nazulis - Backend Engineer" class="profile-photo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p>
+                    I'm a Software Engineer with over 5 years of experience specializing in backend
+                    development using Go and Java. My expertise lies in building robust microservices
+                    architectures and scalable systems using PostgreSQL, MySQL, MongoDB, Redis, and Kafka.
+                    I'm passionate about system design, performance optimization, and ensuring code quality
+                    through code reviews and best practices.
+                </p>
+                <p>
+                    Beyond coding, I'm committed to continuous learning and driving innovation in the IT 
+                    industry. I focus on staying updated with emerging technologies. My approach combines
+                    strong problem-solving skills, critical thinking, and a dedication to delivering high-quality
+                    products that make a real impact.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <ul>
+                        <li>Go</li>
+                        <li>Java</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Databases</h3>
+                    <ul>
+                        <li>PostgreSQL</li>
+                        <li>MySQL</li>
+                        <li>MongoDB</li>
+                        <li>Redis</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Technologies & Frameworks</h3>
+                    <ul>
+                        <li>Apache Kafka</li>
+                        <li>RESTful APIs</li>
+                        <li>gRPC</li>
+                        <li>Microservices</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & DevOps</h3>
+                    <ul>
+                        <li>Git / GitLab</li>
+                        <li>Docker</li>
+                        <li>Swagger</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="project1" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            
+            <!-- Project 1 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>VAT Payment Integration System</h3>
+                    <span class="project-role">Squad Lead | LinkAja</span>
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">Go</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">Redis</span>
+                    <span class="tech-tag">Kafka</span>
+                </div>
+                <p class="project-description">
+                    Led the implementation of an automated VAT (Value Added Tax) payment
+                    integration system with the tax payment aggregator. Architected APIs and systems handling 11% VAT collection for cross-border merchant transactions, tax
+                    reimbursements, and integration with government tax authorities. Guided the squad through
+                     the full development lifecycle from requirements to production deployment.
+                </p>
+                <div class="project-highlights">
+                    <h4>Key Achievements:</h4>
+                    <ul>
+                        <li>Designed and implemented automated VAT calculation flow for LinkAja's WCO(web based payment) transactions</li>
+                        <li>Built H+1 batch processing system using Kafka for tax payment information submission to the aggregator</li>
+                        <li>Developed refund reconciliation mechanism handling decline and chargeback scenarios</li>
+                        <li>Designed tax record database with immutable audit logs, transaction lineage tracking,
+                            and optimized indexing for the aggregator reporting</li>
+                        <li>Integrated tax collection with a seamless user transaction experience</li>
+                        <li>Ensured compliance with government tax regulations and reporting requirements</li>
+                    </ul>
+                </div>
+                <div class="project-challenges">
+                    <h4>Technical Challenges Solved:</h4>
+                    <ul>
+                        <li>Designed and implemented secure authentication system supporting onboarding workflows and transaction-level authorization</li>
+                        <li>Implemented distributed transaction handling for tax collection across microservices</li>
+                        <li>Built a robust reconciliation system for handling refunds and chargebacks with tax reversals</li>
+                        <li>Implemented comprehensive logging and monitoring for tax compliance
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+    <!-- Projects Section -->
+    <section id="project2" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+
+            <!-- Project 2 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Payment Gateway Orchestration Platform</h3>
+                    <span class="project-role">Squad Lead | LinkAja</span>
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">Go</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">Redis</span>
+                    <span class="tech-tag">Kafka</span>
+                </div>
+                <p class="project-description">
+                    Developed and maintained LinkAja's Payment Gateway platform serving as an orchestrator
+                    for digital payments between partners and multiple payment sources. Built scalable APIs
+                    supporting both <a href="https://aspi-indonesia.or.id/standar-dan-layanan/standar-open-api-pembayaran-indonesia-snap/" target="_blank" rel="noopener noreferrer">SNAP</a> and Non-SNAP protocols, integrating with 5+ payment providers
+                    including e-wallets (GoPay, OVO, ShopeePay, DANA), credit/debit cards, and banking systems.
+                </p>
+                <div class="project-highlights">
+                    <h4>Key Achievements:</h4>
+                    <ul>
+                        <li>Architected and deployed microservices handling payment orchestration for a multiple source of funds (SoF)</li>
+                        <li>Integrated 5+ payment providers including GoPay, OVO, ShopeePay, DANA, and major Indonesian banks</li>
+                        <li>Implemented dual-gateway architecture supporting both SNAP and Non-SNAP protocols</li>
+                        <li>Built an intelligent traffic routing system with configurable flags for seamless provider migration</li>
+                        <li>Developed allowlisting mechanism for token migration ensuring zero downtime during provider transitions</li>
+                        <li>Designed RESTful APIs for account binding, balance inquiry, and payment transactions</li>
+                    </ul>
+                </div>
+                <div class="project-challenges">
+                    <h4>Technical Challenges Solved:</h4>
+                    <ul>
+                        <li>Implemented intelligent traffic routing with configurable flags and MSISDN allowlisting to orchestrate seamless 
+                            provider migration while maintaining backward compatibility</li>
+                        <li>Built resilient integration layer handling diverse API specifications across 5+ payment providers</li>
+                        <li>Designed idempotent payment processing preventing duplicate transactions in a distributed environment</li>
+                        <li>Created comprehensive error handling for third-party API failures</li>
+                        <li>Implemented secure authentication and authorization for partner integrations</li>
+                        <li>Built monitoring and alerting system for real-time payment transaction tracking across multiple providers</li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+    <!-- Projects Section -->
+    <section id="project3" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+
+            <!-- Project 3 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>MyPaylater - BNPL Platform Integration</h3>
+                    <span class="project-role">Squad Lead | LinkAja</span>
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">Go</span>
+                    <span class="tech-tag">Java</span>
+                    <span class="tech-tag">Kong</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">Redis</span>
+                    <span class="tech-tag">Kafka</span>
+                </div>
+                <p class="project-description">
+                    Led the revamp and launch of LinkAja's Buy Now Pay Later (BNPL) feature "MyPaylater"
+                    integrated with Kredivo as the lending partner. Architected end-to-end user flows including
+                    registration, account activation, binding, and installment payment processing. Orchestrated
+                    the integration across multiple services, including mobile app's gateway and web's gateway
+                    enabling users to make purchases with flexible installment options directly through the LinkAja platform.
+                </p>
+                <div class="project-highlights">
+                    <h4>Key Achievements:</h4>
+                    <ul>
+                        <li>Led squad through complete BNPL feature revamp from requirement gathering to production launch</li>
+                        <li>Designed and implemented seamless Kredivo account registration flow</li>
+                        <li>Built dual-path user onboarding supporting both new registrations and existing account binding</li>
+                        <li>Architected payment inquiry and installment confirmation flows with real-time balance checks</li>
+                        <li>Integrated Kredivo's backend APIs for user authentication and account management</li>
+                        <li>Implemented comprehensive error handling for third-party API failures and edge cases</li>
+                    </ul>
+                </div>
+                <div class="project-challenges">
+                    <h4>Technical Challenges Solved:</h4>
+                    <ul>
+                        <li>Orchestrated integration between LinkAja and Kredivo's APIs, handling complex authentication, account binding, and transaction flows</li>
+                        <li>Designed and implemented robust webview authentication and gateway services to ensure secure communication between frontend and backend</li>
+                        <li>Managed stateful user journeys across multiple services, ensuring data consistency and a smooth user experience</li>
+                        <li>Addressed security and compliance requirements for financial data, including untokenized account handling and secure API interactions</li>
+                        <li>Built comprehensive logging and monitoring for tracking a user journey and debugging third-party integration issues</li>
+                        <li>Coordinated multi-team collaboration, aligning product, and partner requirements into a unified delivery roadmap</li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="contact-intro">
+                Feel free to reach out if you'd like to discuss potential collaborations
+                or just want to connect!
+            </p>
+            <div class="contact-links">
+                <a href="mailto:inazulis@gmail.com" class="contact-link">
+                    <span class="icon">✉️</span>
+                    inazulis@gmail.com
+                </a>
+                <a href="https://linkedin.com/in/muhammad-iqbal-nazulis" target="_blank" class="contact-link">
+                    <span class="icon">💼</span>
+                    LinkedIn Profile
+                </a>
+                <a href="https://github.com/iqbalnzls" target="_blank" class="contact-link">
+                    <span class="icon">💻</span>
+                    GitHub Profile
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>made with ❤️ by Iqbal</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
