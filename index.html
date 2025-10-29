@@ -147,7 +147,7 @@
                     <h4>Technical Challenges Solved:</h4>
                     <ul>
                         <li>Designed and implemented secure authentication system supporting onboarding workflows and transaction-level authorization</li>
-                        <li>Implemented distributed transaction handling for tax collection across microservices</li>
+                        <li>Implemented distributed transaction handling for tax collection across microservices with gRPC communication</li>
                         <li>Built a robust reconciliation system for handling refunds and chargebacks with tax reversals</li>
                         <li>Implemented comprehensive logging and monitoring for tax compliance
                     </ul>
@@ -175,7 +175,7 @@
                 <div class="project-highlights">
                     <h4>Key Achievements:</h4>
                     <ul>
-                        <li>Architected and deployed microservices handling payment orchestration for a multiple source of funds (SoF)</li>
+                        <li>Architected and deployed microservices with gRPC communication handling payment orchestration for multiple sources of funds (SoF)</li>
                         <li>Integrated 5+ payment providers including GoPay, OVO, ShopeePay, DANA, and major Indonesian banks</li>
                         <li>Implemented dual-gateway architecture supporting both SNAP and Non-SNAP protocols</li>
                         <li>Built an intelligent traffic routing system with configurable flags for seamless provider migration</li>
@@ -236,6 +236,50 @@
                         <li>Addressed security and compliance requirements for financial data, including untokenized account handling and secure API interactions</li>
                         <li>Built comprehensive logging and monitoring for tracking a user journey and debugging third-party integration issues</li>
                         <li>Coordinated multi-team collaboration, aligning product, and partner requirements into a unified delivery roadmap</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>SNAP Standardization Implementation</h3>
+                    <span class="project-role">Backend Engineer | LinkAja</span>
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">Go</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">Redis</span>
+                    <span class="tech-tag">OAuth 2.0</span>
+                </div>
+                <p class="project-description">
+                    Led the implementation of SNAP, Indonesia's National Standard for Open Payment APIs mandated by Bank Indonesia,
+                    at LinkAja's payment ecosystem. Built the gateway from scratch as the centralized HTTP gateway orchestrating API standardization.
+                    Developed SNAP-compliant APIs for multiple payment services including Virtual Account (VA), web-based payments (WCO), Direct Debit (DD),
+                    Enhanced Direct Debit (EDD), QR payments, and Payment Gateway (PG).
+                    Architected the complete integration framework enabling seamless partner onboarding through unified standardized APIs across diverse payment methods.
+                </p>
+                <div class="project-highlights">
+                    <h4>Key Achievements:</h4>
+                    <ul>
+                        <li>Built Borobudur gateway from scratch following clean architecture, serving as a centralized intermediary between clients and backend microservices</li>
+                        <li>Developed SNAP-compliant APIs for Virtual Account (VA), WCO (web payments), EDD (compliance), and other payment services</li>
+                        <li>Integrated 5+ backend microservices via gRPC and REST including payment processing, authentication, transfers, and compliance services</li>
+                        <li>Built a comprehensive OAuth 2.0 authentication system supporting both B2B and B2B2C token flows</li>
+                        <li>Implemented 20+ standardized API endpoints across multiple payment domains ensuring Bank Indonesia compliance</li>
+                        <li>Architected multi-partner integration framework is enabling external partners to connect using a unified SNAP standard</li>
+                    </ul>
+                </div>
+                <div class="project-challenges">
+                    <h4>Technical Challenges Solved:</h4>
+                    <ul>
+                        <li>Designed and implemented SNAP-compliant APIs across multiple payment services while maintaining consistency and reusability</li>
+                        <li>Architected gateway to orchestrate complex flows across 5+ microservices while maintaining clean separation of concerns</li>
+                        <li>Implemented robust rate limiting, request validation, and secure error handling to prevent information leakage</li>
+                        <li>Built intelligent caching layer with Redis to optimize performance and reduce a backend service load</li>
+                        <li>Designed flexible routing system supporting diverse payment flows: direct debit, payment gateway, QR (MPM/CPM), virtual accounts, and bank transfers</li>
+                        <li>Ensured backward compatibility while supporting evolving SNAP protocol versions (v1.0, v2.0) across all services</li>
+                        <li>Implemented comprehensive logging, monitoring, and role-based access control for enterprise-grade security</li>
                     </ul>
                 </div>
             </div>
