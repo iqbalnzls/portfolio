@@ -332,3 +332,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Mobile menu toggle (if needed in the future)
 console.log('Portfolio loaded successfully!');
+
+// ============================================
+// IMAGE MODAL FUNCTIONALITY
+// ============================================
+
+function openImageModal(img) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const captionText = document.getElementById('modalCaption');
+
+    modal.classList.add('show');
+    modalImg.src = img.src;
+    captionText.innerHTML = img.alt;
+
+    // Prevent body scroll when modal is open
+    document.body.style.overflow = 'hidden';
+}
+
+function closeImageModal() {
+    const modal = document.getElementById('imageModal');
+    modal.classList.remove('show');
+
+    // Restore body scroll
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeImageModal();
+    }
+});

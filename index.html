@@ -125,6 +125,9 @@
                     <span class="tech-tag">Redis</span>
                     <span class="tech-tag">Kafka</span>
                 </div>
+                <div class="project-architecture">
+                    <img src="images/vat-system.png" alt="VAT Payment Integration System Architecture" class="architecture-diagram" onclick="openImageModal(this)">
+                </div>
                 <p class="project-description">
                     Led the implementation of an automated VAT (Value Added Tax) payment
                     integration system with the tax payment aggregator. Architected APIs and systems handling 11% VAT collection for cross-border merchant transactions, tax
@@ -147,7 +150,7 @@
                     <h4>Technical Challenges Solved:</h4>
                     <ul>
                         <li>Designed and implemented secure authentication system supporting onboarding workflows and transaction-level authorization</li>
-                        <li>Implemented distributed transaction handling for tax collection across microservices with gRPC communication</li>
+                        <li>Implemented distributed transaction handling for tax collection across microservices architecture</li>
                         <li>Built a robust reconciliation system for handling refunds and chargebacks with tax reversals</li>
                         <li>Implemented comprehensive logging and monitoring for tax compliance
                     </ul>
@@ -165,6 +168,9 @@
                     <span class="tech-tag">PostgreSQL</span>
                     <span class="tech-tag">Redis</span>
                     <span class="tech-tag">Kafka</span>
+                </div>
+                <div class="project-architecture">
+                    <img src="images/pg.png" alt="Payment Gateway Orchestration Platform Architecture" class="architecture-diagram" onclick="openImageModal(this)">
                 </div>
                 <p class="project-description">
                     Developed and maintained LinkAja's Payment Gateway platform serving as an orchestrator
@@ -208,6 +214,9 @@
                     <span class="tech-tag">PostgreSQL</span>
                     <span class="tech-tag">Redis</span>
                     <span class="tech-tag">Kafka</span>
+                </div>
+                <div class="project-architecture">
+                    <img src="images/bnpl.png" alt="MyPaylater BNPL Platform Integration Architecture" class="architecture-diagram" onclick="openImageModal(this)">
                 </div>
                 <p class="project-description">
                     Led the revamp and launch of LinkAja's Buy Now Pay Later (BNPL) feature "MyPaylater"
@@ -318,6 +327,13 @@
             <p>made with ❤️ by Iqbal</p>
         </div>
     </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
 
     <script src="script.js"></script>
 </body>
