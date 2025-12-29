@@ -260,6 +260,9 @@
                     <span class="tech-tag">PostgreSQL</span>
                     <span class="tech-tag">OAuth 2.0</span>
                 </div>
+                <div class="project-architecture">
+                    <img src="images/snap.png" alt="SNAP Standardization Implementation Architecture" class="architecture-diagram" onclick="openImageModal(this)">
+                </div>
                 <p class="project-description">
                     Led the implementation of <a href="https://aspi-indonesia.or.id/standar-dan-layanan/standar-open-api-pembayaran-indonesia-snap/" target="_blank" rel="noopener noreferrer">SNAP</a>, Indonesia's National Standard for Open Payment APIs mandated by Bank Indonesia,
                     at LinkAja's payment ecosystem. Built the gateway from scratch as the centralized HTTP gateway orchestrating API standardization.
@@ -284,7 +287,6 @@
                         <li>Designed and implemented SNAP-compliant APIs across multiple payment services while maintaining consistency and reusability</li>
                         <li>Architected gateway to orchestrate complex flows across 5+ microservices while maintaining clean separation of concerns</li>
                         <li>Implemented robust rate limiting, request validation, and secure error handling to prevent information leakage</li>
-                        <li>Built intelligent caching layer with Redis to optimize performance and reduce a backend service load</li>
                         <li>Designed flexible routing system supporting diverse payment flows: direct debit, payment gateway, QR (MPM/CPM), virtual accounts, and bank transfers</li>
                         <li>Ensured backward compatibility while supporting evolving SNAP protocol versions (v1.0, v2.0) across all services</li>
                         <li>Implemented comprehensive logging, monitoring, and role-based access control for enterprise-grade security</li>
