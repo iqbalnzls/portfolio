@@ -19,88 +19,119 @@ function resizeCanvas() {
     initStars();
 }
 
-// Star class
+// Galaxy center point
+let centerX = 0;
+let centerY = 0;
+
+// Star class with depth layers and orbital motion
 class Star {
-    constructor() {
+    constructor(layer = 'mid') {
+        this.layer = layer;
         this.reset();
-        this.y = Math.random() * canvas.height;
     }
 
     reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2;
+        // Position stars in orbital pattern around center
+        centerX = canvas.width * 0.5;
+        centerY = canvas.height * 0.5;
+
+        // Random angle and distance from center
+        this.angle = Math.random() * Math.PI * 2;
+
+        // Set properties based on depth layer
+        switch (this.layer) {
+            case 'far':
+                // Far stars: tiny, slow orbit, dim
+                this.size = Math.random() * 0.8 + 0.3;
+                this.orbitSpeed = (Math.random() * 0.0001 + 0.00005);
+                this.opacity = Math.random() * 0.3 + 0.2;
+                this.twinkleSpeed = Math.random() * 0.008 + 0.003;
+                this.color = { r: 180, g: 200, b: 255 };
+                this.distance = Math.random() * canvas.width * 0.8 + 100;
+                this.parallaxFactor = 0.3;
+                break;
+            case 'near':
+                // Near stars: larger, faster orbit, brighter
+                this.size = Math.random() * 2 + 1.5;
+                this.orbitSpeed = (Math.random() * 0.0004 + 0.0002);
+                this.opacity = Math.random() * 0.3 + 0.6;
+                this.twinkleSpeed = Math.random() * 0.02 + 0.01;
+                this.color = { r: 255, g: 255, b: 255 };
+                this.distance = Math.random() * canvas.width * 0.3 + 50;
+                this.parallaxFactor = 1.5;
+                break;
+            default: // 'mid'
+                // Mid stars: medium everything
+                this.size = Math.random() * 1.2 + 0.6;
+                this.orbitSpeed = (Math.random() * 0.0002 + 0.0001);
+                this.opacity = Math.random() * 0.4 + 0.3;
+                this.twinkleSpeed = Math.random() * 0.012 + 0.005;
+                this.color = { r: 220, g: 230, b: 255 };
+                this.distance = Math.random() * canvas.width * 0.5 + 80;
+                this.parallaxFactor = 0.8;
+        }
+
         this.baseSize = this.size;
-        this.speed = Math.random() * 0.5 + 0.1;
-        this.opacity = Math.random() * 0.5 + 0.5;
-        this.twinkleSpeed = Math.random() * 0.02 + 0.01;
-        this.baseX = this.x;
-        this.baseY = this.y;
-        this.vx = 0;
-        this.vy = 0;
+        this.baseOpacity = this.opacity;
+        // Calculate initial position
+        this.x = centerX + Math.cos(this.angle) * this.distance;
+        this.y = centerY + Math.sin(this.angle) * this.distance;
+        // Offset for cursor interaction
+        this.offsetX = 0;
+        this.offsetY = 0;
     }
 
     update() {
+        // Update center position (in case of resize)
+        centerX = canvas.width * 0.5;
+        centerY = canvas.height * 0.5;
+
         // Twinkle effect
         this.opacity += this.twinkleSpeed;
-        if (this.opacity > 1 || this.opacity < 0.3) {
+        if (this.opacity > this.baseOpacity + 0.15 || this.opacity < this.baseOpacity - 0.15) {
             this.twinkleSpeed *= -1;
         }
 
-        // Calculate distance from mouse
-        const dx = mouseX - this.x;
-        const dy = mouseY - this.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const maxDistance = 150;
+        // Orbital motion - rotate around center
+        this.angle += this.orbitSpeed;
+
+        // Base position from orbit
+        const baseX = centerX + Math.cos(this.angle) * this.distance;
+        const baseY = centerY + Math.sin(this.angle) * this.distance;
+
+        // Calculate distance from mouse for cursor interaction
+        const dx = mouseX - (baseX + this.offsetX);
+        const dy = mouseY - (baseY + this.offsetY);
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const maxDist = 120 * this.parallaxFactor;
 
         // Push stars away from cursor
-        if (distance < maxDistance && isMouseMoving) {
-            const force = (maxDistance - distance) / maxDistance;
+        if (dist < maxDist && isMouseMoving) {
+            const force = (maxDist - dist) / maxDist;
             const angle = Math.atan2(dy, dx);
-            this.vx -= Math.cos(angle) * force * 2;
-            this.vy -= Math.sin(angle) * force * 2;
-
-            // Make stars grow when pushed
+            this.offsetX -= Math.cos(angle) * force * 3 * this.parallaxFactor;
+            this.offsetY -= Math.sin(angle) * force * 3 * this.parallaxFactor;
             this.size = this.baseSize * (1 + force * 0.5);
         } else {
             this.size = this.baseSize;
         }
 
-        // Apply velocity with damping
-        this.vx *= 0.95;
-        this.vy *= 0.95;
+        // Dampen offset back to zero
+        this.offsetX *= 0.95;
+        this.offsetY *= 0.95;
 
-        // Update position
-        this.x += this.vx;
-        this.y += this.vy;
-
-        // Slowly return to base position
-        this.x += (this.baseX - this.x) * 0.01;
-        this.y += (this.baseY - this.y) * 0.01;
-
-        // Slow vertical drift
-        this.baseY -= this.speed * 0.2;
-
-        // Reset if out of bounds
-        if (this.baseY < -10) {
-            this.baseY = canvas.height + 10;
-            this.baseX = Math.random() * canvas.width;
-        }
+        // Final position
+        this.x = baseX + this.offsetX;
+        this.y = baseY + this.offsetY;
     }
 
     draw() {
+        const { r, g, b } = this.color;
+
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${this.opacity})`;
         ctx.fill();
-
-        // Add glow effect for larger stars
-        if (this.size > 1.5) {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(150, 200, 255, ${this.opacity * 0.2})`;
-            ctx.fill();
-        }
     }
 }
 
@@ -154,15 +185,30 @@ class ShootingStar {
     }
 }
 
-// Initialize stars
+// Initialize stars with depth layers
 function initStars() {
     stars = [];
-    // Reduce star count on mobile for better performance
     const isMobile = window.innerWidth < 768;
-    const divisor = isMobile ? 5000 : 3000;
-    const starCount = Math.floor((canvas.width * canvas.height) / divisor);
-    for (let i = 0; i < starCount; i++) {
-        stars.push(new Star());
+
+    // Many more stars for dense galaxy effect
+    const baseCount = Math.floor((canvas.width * canvas.height) / (isMobile ? 1500 : 600));
+
+    // Far layer: many tiny dim stars (70% of total)
+    const farCount = Math.floor(baseCount * 0.70);
+    for (let i = 0; i < farCount; i++) {
+        stars.push(new Star('far'));
+    }
+
+    // Mid layer: medium stars (25% of total)
+    const midCount = Math.floor(baseCount * 0.25);
+    for (let i = 0; i < midCount; i++) {
+        stars.push(new Star('mid'));
+    }
+
+    // Near layer: few larger stars (5% of total)
+    const nearCount = Math.floor(baseCount * 0.05);
+    for (let i = 0; i < nearCount; i++) {
+        stars.push(new Star('near'));
     }
 }
 
@@ -268,7 +314,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Scroll reveal animation for project cards
+// Scroll reveal animation for project cards (repeats on scroll up/down)
 const observerOptions = {
     threshold: 0.15,
     rootMargin: '0px 0px -50px 0px'
@@ -278,6 +324,9 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+        } else {
+            // Remove class when out of view to replay animation
+            entry.target.classList.remove('visible');
         }
     });
 }, observerOptions);
@@ -292,13 +341,17 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(card);
     });
 
-    // Skill categories fade in
+    // Skill categories fade in (repeats on scroll)
     const skillCategories = document.querySelectorAll('.skill-category');
     const skillObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+            } else {
+                // Reset when out of view
+                entry.target.style.opacity = '0';
+                entry.target.style.transform = 'translateY(30px)';
             }
         });
     }, { threshold: 0.1 });
@@ -310,7 +363,7 @@ document.addEventListener('DOMContentLoaded', () => {
         skillObserver.observe(category);
     });
 
-    // About section fade in
+    // About section fade in (repeats on scroll)
     const aboutContent = document.querySelector('.about-content');
     if (aboutContent) {
         aboutContent.style.opacity = '0';
@@ -322,16 +375,137 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
+                } else {
+                    // Reset when out of view
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(30px)';
                 }
             });
         }, { threshold: 0.2 });
 
         aboutObserver.observe(aboutContent);
     }
+
+    // Contact section fade in (repeats on scroll)
+    const contactIntro = document.querySelector('.contact-intro');
+    const contactLinks = document.querySelectorAll('.contact-link');
+
+    if (contactIntro) {
+        contactIntro.style.opacity = '0';
+        contactIntro.style.transform = 'translateY(20px)';
+        contactIntro.style.transition = 'all 0.6s ease';
+
+        const contactObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                } else {
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(20px)';
+                }
+            });
+        }, { threshold: 0.2 });
+
+        contactObserver.observe(contactIntro);
+    }
+
+    contactLinks.forEach((link, index) => {
+        link.style.opacity = '0';
+        link.style.transform = 'translateX(-20px)';
+        link.style.transition = `all 0.5s ease ${index * 0.1}s`;
+
+        const linkObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateX(0)';
+                } else {
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateX(-20px)';
+                }
+            });
+        }, { threshold: 0.2 });
+
+        linkObserver.observe(link);
+    });
+
+    // Section titles fade in (repeats on scroll)
+    const sectionTitles = document.querySelectorAll('.section-title');
+    sectionTitles.forEach(title => {
+        title.style.opacity = '0';
+        title.style.transform = 'translateY(20px)';
+        title.style.transition = 'all 0.6s ease';
+
+        const titleObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                } else {
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(20px)';
+                }
+            });
+        }, { threshold: 0.3 });
+
+        titleObserver.observe(title);
+    });
 });
 
 // Mobile menu toggle (if needed in the future)
 console.log('Portfolio loaded successfully!');
+
+// ============================================
+// TYPEWRITER EFFECT
+// ============================================
+
+const typewriterElement = document.getElementById('typewriter');
+const titles = [
+    'Software Engineer',
+    'Tech Enthusiast',
+    'Problem Solver'
+];
+
+let titleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typeSpeed = 100;
+
+function typeWriter() {
+    const currentTitle = titles[titleIndex];
+
+    if (isDeleting) {
+        // Remove characters
+        typewriterElement.textContent = currentTitle.substring(0, charIndex - 1);
+        charIndex--;
+        typeSpeed = 50;
+    } else {
+        // Add characters
+        typewriterElement.textContent = currentTitle.substring(0, charIndex + 1);
+        charIndex++;
+        typeSpeed = 100;
+    }
+
+    // If word is complete
+    if (!isDeleting && charIndex === currentTitle.length) {
+        // Pause at end of word
+        typeSpeed = 2000;
+        isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+        // Move to next word
+        isDeleting = false;
+        titleIndex = (titleIndex + 1) % titles.length;
+        typeSpeed = 500;
+    }
+
+    setTimeout(typeWriter, typeSpeed);
+}
+
+// Start typewriter when DOM is loaded
+if (typewriterElement) {
+    setTimeout(typeWriter, 1000);
+}
 
 // ============================================
 // IMAGE MODAL FUNCTIONALITY
